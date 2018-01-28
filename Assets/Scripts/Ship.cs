@@ -48,6 +48,14 @@ public class Ship : MonoBehaviour {
         // pos = vel * time
         pos += this.vel * Time.fixedDeltaTime;
         this.transform.position = pos;
+
+        // check collision
+        foreach(DeathArea.GetCrash g in DeathArea.crashlist) {
+            if (g(pos)) {
+                // die
+                this.Death();
+            }
+        }
 	}
 
     // do a forward thrust
@@ -56,6 +64,11 @@ public class Ship : MonoBehaviour {
     }
     public void StopThrust() {
         thrust_amt = 0f;
+    }
+
+    public void Death() {
+        // make an explosion the size of the mass
+        Debug.Log("Death");
     }
 
     public Vector2[] GetFuture(int count, float timestep) {

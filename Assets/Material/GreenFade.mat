@@ -62,14 +62,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Jitter: 0.09
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _Seed: 13.37
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _ZJitter: 0.09
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.006896496, a: 1}

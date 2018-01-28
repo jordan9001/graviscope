@@ -32,7 +32,6 @@ public class DrawnObject : MonoBehaviour {
                 r += step;
             }
         }
-        Debug.LogFormat("Adding drawnobj to {0}", this.name);
         rend = gameObject.AddComponent<LineRenderer>();
         rend.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         rend.receiveShadows = false;
@@ -68,7 +67,7 @@ public class DrawnObject : MonoBehaviour {
     }
 
     public void UpdateZoom(float camsize) {
-        rend.widthMultiplier = camsize * (this.width * widthadj) / 30;
+        rend.widthMultiplier = camsize * (this.width * widthadj);
     }
 
     public void UpdatePositions() {

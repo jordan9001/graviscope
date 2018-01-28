@@ -23,11 +23,11 @@ public class Heavy : MonoBehaviour {
     }
 
     // draw extent of pull
-    void OnDrawGizmos() {
+    /*void OnDrawGizmos() {
         // gravity lines are yellow
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(this.transform.position, range);
-    }
+    }*/
 
     // gets the gravity accelaration assuming much larger
     // time offset is for moving planets and stuff from future path stuff
@@ -41,9 +41,9 @@ public class Heavy : MonoBehaviour {
         Vector2 r = mypos - pos;
         float r_sqm = r.SqrMagnitude();
 
-        if (r_sqm > this.range2) {
+        /*if (r_sqm > this.range2) {
             return Vector2.zero;
-        }
+        }*/
 
         r.Normalize();
         //g = G * mass / r_sqm;
