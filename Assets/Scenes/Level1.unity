@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 2008049560}
   - component: {fileID: 2008049565}
   - component: {fileID: 2008049566}
+  - component: {fileID: 2008049567}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -426,6 +427,18 @@ MonoBehaviour:
   jitterers:
   - {fileID: 2100000, guid: 02b0f14f02bdedc4f8e33e3dbed1b86f, type: 2}
   - {fileID: 2100000, guid: 136b9a0006ad4914f961a34d14d50d62, type: 2}
+--- !u!114 &2008049567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2008049559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: b6ecc33ee0468a84aa159f3d8d7f5969, type: 2}
 --- !u!1 &2093574822
 GameObject:
   m_ObjectHideFlags: 0
