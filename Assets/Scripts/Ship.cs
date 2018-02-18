@@ -7,6 +7,7 @@ public class Ship : MonoBehaviour {
 
     public delegate Vector2 GetGrav(Vector2 pos, float timeoff);
     public static List<GetGrav> heavyobjs = new List<GetGrav>();
+    public Object explosion_fab;
 
     [Range(0.1f, 1000f)]
     public float mass = 1.0f;
@@ -15,14 +16,16 @@ public class Ship : MonoBehaviour {
 
     // this velocity is worldspace
     // doesn't scale or rotate with object
-    private Vector2 vel;
+    public Vector2 vel;
     private float thrust_amt = 0f;
 
-    void Start () {
-		
-	}
-	
-	void FixedUpdate () {
+    private WeaponRack wr;
+
+    private void Start() {
+        wr = this.GetComponent<WeaponRack>();
+    }
+
+    void FixedUpdate () {
         Vector2 acc = Vector2.zero;
 
         Vector2 pos = new Vector2(this.transform.position.x, this.transform.position.y);
@@ -62,13 +65,22 @@ public class Ship : MonoBehaviour {
     public void Thrust(float amt) {
         thrust_amt = amt;
     }
+
     public void StopThrust() {
         thrust_amt = 0f;
+    }
+
+    public bool Fire(WeaponRack.Mode mode) {
+        wr.Fire(this.transform.position, vel, this.transform.up, mode);
+        return true;
     }
 
     public void Death() {
         // make an explosion the size of the mass
         Debug.Log("Death");
+        Instantiate(explosion_fab, this.transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 
     public Vector2[] GetFuture(int count, float timestep) {

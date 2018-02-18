@@ -10,10 +10,10 @@ public class Heavy : MonoBehaviour {
 
     public static float G = 0.6f;
 
-    private float range2;
+    //private float range2;
 
     void Start() {
-        range2 = range * range;
+        //range2 = range * range;
         // registor with the ships
         Ship.heavyobjs.Add(this.GetGrav);
     }

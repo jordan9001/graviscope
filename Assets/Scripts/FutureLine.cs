@@ -11,7 +11,6 @@ public class FutureLine : MonoBehaviour {
     public float timestep_sc = 1.8f; // if this is not 1 it will have error, which looks cool
 
     private DrawnObject path;
-    [HideInInspector]
     private Vector3[] points;
 
 	void Start () {

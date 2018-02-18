@@ -9,6 +9,7 @@ public class DeathArea : MonoBehaviour {
 
     [Range(1f, 600f)]
     public float radius;
+    public bool invert = false;
 
     private float r_sqr;
 
@@ -21,14 +22,29 @@ public class DeathArea : MonoBehaviour {
 
     void OnDrawGizmos() {
         Gizmos.color = Color.red;
+        if (invert) {
+            Gizmos.color = Color.white;
+        }
         Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 
     public bool IsCrash(Vector2 pos) {
         Vector2 mypos = this.transform.position;
 
-        if ((mypos - pos).SqrMagnitude() <= r_sqr) {
-            return true;
+        if (pos == mypos) {
+            // TODO
+            // this may be a dumb way to check for our own object's death area?
+            return false;
+        }
+
+        if (invert) {
+            if ((mypos - pos).SqrMagnitude() > r_sqr) {
+                return true;
+            }
+        } else {
+            if ((mypos - pos).SqrMagnitude() < r_sqr) {
+                return true;
+            }
         }
         return false;
     }

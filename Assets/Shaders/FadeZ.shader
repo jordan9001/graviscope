@@ -4,8 +4,9 @@
 	{
         _Color ("Main Color", Color) = (0, 1, 0, 1) //Color
 		_Seed ("Seed", Float) = 13.37 // random seed
-		_Jitter ("Jitter", Float) = 0.3 // jitter
-		_ZJitter ("Z Jitter", Float) = 0.9 // Z jitter
+		_Jitter ("Jitter", Float) = 0.1 // jitter
+		_ZJitter ("Z Jitter", Float) = 0.06 // Z jitter
+		_JitterF ("Jitter Speed", Float) = 0.0000012 // Jitter flash rate
 	}
 	SubShader
 	{		
@@ -35,10 +36,12 @@
 			float _Seed;
 			float _Jitter;
 			float _ZJitter;
+			float _JitterF;
 
 			float randoff(float co)
 			{
-				return frac(sin(_Time[3] * dot(float2(co, _Seed) ,float2(12.9898,78.233))) * 43758.5453);
+				return frac(sin((_Time[0] * _JitterF) * dot(float2(co, _Seed) ,float2(12.9898,78.233))) * 43758.5453) - 0.5;
+				//return frac(sin(dot(float2(co, _Seed) ,float2(12.9898,78.233))) * 43758.5453);
 			}
 
 			v2f vert (appdata v)
@@ -47,7 +50,7 @@
 				float4 vrtx = v.vertex;
 				
 				vrtx.x += (randoff(vrtx.x + vrtx.y) * _Jitter);
-				vrtx.x += (randoff(vrtx.x - vrtx.y) * _Jitter);
+				vrtx.y += (randoff(vrtx.x - vrtx.y) * _Jitter);
 				vrtx.z += (randoff(vrtx.z + vrtx.y + vrtx.x) * _ZJitter);
 
 				o.vertex = UnityObjectToClipPos(vrtx);

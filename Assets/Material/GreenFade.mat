@@ -63,6 +63,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Jitter: 0.03
+    - _JitterF: 0.0000006
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -72,7 +73,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _ZJitter: 0.2
+    - _ZJitter: 0.03
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 1, b: 0.006896496, a: 1}

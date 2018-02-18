@@ -16,7 +16,7 @@ public class DrawnObject : MonoBehaviour {
     public bool loop = true;
     public bool worldspace = false;
 
-    private LineRenderer rend;
+    private LineRenderer rend = null;
     private const float widthadj = 0.09f;
 
 
@@ -47,7 +47,7 @@ public class DrawnObject : MonoBehaviour {
         rend.widthMultiplier = this.width * widthadj;
 
         // add yourself as a zoomer
-        CameraScript.zoomers.Add(UpdateZoom);
+        CameraScript.zoomers.Add(this.UpdateZoom);
     }
 
     void OnDrawGizmos() {
@@ -66,11 +66,17 @@ public class DrawnObject : MonoBehaviour {
         }
     }
 
+    void OnDestroy() {
+        CameraScript.zoomers.Remove(this.UpdateZoom);
+    }
+
     public void UpdateZoom(float camsize) {
         rend.widthMultiplier = camsize * (this.width * widthadj);
     }
 
     public void UpdatePositions() {
-        rend.SetPositions(points);
+        if (rend != null) {
+            rend.SetPositions(points);
+        }
     }
 }

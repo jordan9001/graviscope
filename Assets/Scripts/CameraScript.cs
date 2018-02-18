@@ -32,9 +32,39 @@ public class CameraScript : MonoBehaviour {
 	
 	void Update () {
         // follow player
-        this.transform.position = player.transform.position + this.offset;
+        if (player != null) {
+            this.transform.position = player.transform.position + this.offset;
 
-        // get inputs
+            // get inputs
+
+            // mouse look
+            Vector2 look_dir = Input.mousePosition - Camera.main.WorldToScreenPoint(player.transform.position);
+            float angle = Mathf.Atan2(look_dir.y, look_dir.x) * Mathf.Rad2Deg - 90f;
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotspeed);
+
+            // mouse click
+            // left click
+            if (Input.GetMouseButtonDown(0)) {
+                // shoot
+                player.Fire(WeaponRack.Mode.FIRE_DOWN);
+            } else if (Input.GetMouseButtonUp(0)) {
+                // left click up
+                player.Fire(WeaponRack.Mode.FIRE_UP);
+            }
+
+            // middle click
+            if (Input.GetMouseButtonDown(2)) {
+                player.Fire(WeaponRack.Mode.FIRE_SPEC);
+            }
+
+            // right click
+            if (Input.GetMouseButtonDown(1)) {
+                // thrust
+                player.Thrust(1.0f);
+            } else if (Input.GetMouseButtonUp(1)) {
+                player.StopThrust();
+            }
+        }
 
         // zoom
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -50,26 +80,6 @@ public class CameraScript : MonoBehaviour {
             foreach (UpdateZoom z in zoomers) {
                 z(cam.orthographicSize / startingsize);
             }
-        }
-
-        // mouse look
-        Vector2 look_dir = Input.mousePosition - Camera.main.WorldToScreenPoint(player.transform.position);
-        float angle = Mathf.Atan2(look_dir.y, look_dir.x) * Mathf.Rad2Deg - 90f;
-        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotspeed);
-
-        // mouse click
-        if (Input.GetMouseButtonDown(0)) {
-            // left click
-            // shoot
-        }
-
-        if (Input.GetMouseButtonDown(1)) {
-            // right click
-            // thrust
-            player.Thrust(1.0f);
-        }
-        if (Input.GetMouseButtonUp(1)) {
-            player.StopThrust();
         }
 
     }
