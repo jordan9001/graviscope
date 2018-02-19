@@ -24,15 +24,21 @@ public class WeaponRack : MonoBehaviour {
 
     public static List<IWeapon> all_weapons = new List<IWeapon>();
 
+    [HideInInspector]
     public List<int> weapon_ammo;
+    [HideInInspector]
     public int selected = 0;
 
     private float reloaded = 0.0f;
 
     void Start() {
+        if (all_weapons.Count == 0) {
+            Debug.Log("Error! Zero count all_weapons");
+        }
+
         weapon_ammo = new List<int>(all_weapons.Count);
         for (int i = 0; i < all_weapons.Count; i++) {
-            weapon_ammo.Add(0);
+            weapon_ammo.Add(6);
         }
     }
 

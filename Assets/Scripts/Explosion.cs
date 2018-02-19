@@ -12,6 +12,7 @@ public class Explosion : MonoBehaviour {
 
     private Vector3[] points;
     private DrawnObject path;
+    private DeathArea darea;
 
     private float time = 0f;
 
@@ -25,6 +26,9 @@ public class Explosion : MonoBehaviour {
         path.points = points;
         path.loop = false;
         path.worldspace = true;
+
+        darea = gameObject.AddComponent<DeathArea>();
+        darea.radius = start_size;
 
         Random_Cloud();
     }
@@ -55,5 +59,7 @@ public class Explosion : MonoBehaviour {
         }
 
         path.UpdatePositions();
+
+        darea.Resize(maxrad);
     }
 }

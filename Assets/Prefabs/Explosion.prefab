@@ -54,6 +54,6 @@ MonoBehaviour:
   point_count: 9
   grow_time: 1.8
   start_size: 1
-  end_size: 45
-  fade_time: 1
+  end_size: 69
+  fade_time: 1.2
   mat: {fileID: 2100000, guid: 052ca93ccd58e494cb8bc23e6a7f5d7b, type: 2}

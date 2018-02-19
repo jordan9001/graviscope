@@ -8,7 +8,7 @@ public class FutureLine : MonoBehaviour {
     public Material mat;
     public Ship ship;
     [Range(1f, 20f)]
-    public float timestep_sc = 1.8f; // if this is not 1 it will have error, which looks cool
+    public float timestep_sc = 1.8f; // if this is not 1 it will have wobble error, which looks cool and save comp
 
     private DrawnObject path;
     private Vector3[] points;

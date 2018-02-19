@@ -9,10 +9,12 @@ public class Ship : MonoBehaviour {
     public static List<GetGrav> heavyobjs = new List<GetGrav>();
     public Object explosion_fab;
 
-    [Range(0.1f, 1000f)]
+    [Range(0.0001f, 1000f)]
     public float mass = 1.0f;
     [Range(0.1f, 1000f)]
     public float thrust = 1.0f;
+
+    public float grav_mult = 1.0f; // this is to make projectiles a bit more fun
 
     // this velocity is worldspace
     // doesn't scale or rotate with object
@@ -32,7 +34,7 @@ public class Ship : MonoBehaviour {
 
         // get acc from gravity
         foreach (GetGrav g in heavyobjs) {
-            acc += g(pos, 0.0f);
+            acc += grav_mult * g(pos, 0.0f);
         }
 
         // get acc from thrust
@@ -71,8 +73,11 @@ public class Ship : MonoBehaviour {
     }
 
     public bool Fire(WeaponRack.Mode mode) {
-        wr.Fire(this.transform.position, vel, this.transform.up, mode);
-        return true;
+        if (wr == null) {
+            Debug.LogFormat("Tried to fire a ship with no weaponrack");
+            return false;
+        }
+        return wr.Fire(this.transform.position, vel, this.transform.up, mode);
     }
 
     public void Death() {

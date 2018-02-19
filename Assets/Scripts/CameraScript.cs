@@ -25,6 +25,8 @@ public class CameraScript : MonoBehaviour {
     private Vector3 offset = Vector3.back * 30;
     private float startingsize;
 
+    public static float lastsize = 1.0f;
+
     void Start () {
         cam = this.GetComponent<Camera>();
         startingsize = cam.orthographicSize;
@@ -76,9 +78,9 @@ public class CameraScript : MonoBehaviour {
             if (cam.orthographicSize < zoommin) {
                 cam.orthographicSize = zoommin;
             }
-
+            lastsize = cam.orthographicSize / startingsize;
             foreach (UpdateZoom z in zoomers) {
-                z(cam.orthographicSize / startingsize);
+                z(lastsize);
             }
         }
 

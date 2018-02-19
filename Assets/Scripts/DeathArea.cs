@@ -28,6 +28,15 @@ public class DeathArea : MonoBehaviour {
         Gizmos.DrawWireSphere(this.transform.position, radius);
     }
 
+    public void Resize(float rad) {
+        this.radius = rad;
+        this.r_sqr = rad * rad;
+    }
+
+    private void OnDestroy() {
+        crashlist.Remove(this.IsCrash);
+    }
+
     public bool IsCrash(Vector2 pos) {
         Vector2 mypos = this.transform.position;
 

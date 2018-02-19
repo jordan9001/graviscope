@@ -14,6 +14,7 @@ public class DrawnObject : MonoBehaviour {
     public Material mat;
     public float width = 1f;
     public bool loop = true;
+    [HideInInspector]
     public bool worldspace = false;
 
     private LineRenderer rend = null;
@@ -44,7 +45,7 @@ public class DrawnObject : MonoBehaviour {
         rend.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
         rend.positionCount = points.Length;
         rend.SetPositions(points);
-        rend.widthMultiplier = this.width * widthadj;
+        rend.widthMultiplier = CameraScript.lastsize * this.width * widthadj;
 
         // add yourself as a zoomer
         CameraScript.zoomers.Add(this.UpdateZoom);

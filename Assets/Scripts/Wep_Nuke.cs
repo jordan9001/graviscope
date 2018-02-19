@@ -6,14 +6,14 @@ public class Wep_Nuke : MonoBehaviour, IWeapon {
 
     [Range(0.03f, 15f)]
     public float reload_time = 0.45f;
-    public float shot_power = 3.0f;
+    public float shot_offset = 3.0f;
     public string wepname;
     public GameObject missle_fab;
 
-	// Use this for initialization
-	void Start () {
+	void Awake () {
         // join the WeaponRack
         WeaponRack.all_weapons.Add(this);
+        Debug.Log("Added nuke to weapons");
         // TODO initialize pool
 	}
 
@@ -29,12 +29,11 @@ public class Wep_Nuke : MonoBehaviour, IWeapon {
         // TODO
 
         GameObject m = Instantiate(missle_fab);
-
-        // place it just out of reach of the death area
-        m.transform.position = loc + (dir * m.GetComponent<DeathArea>().radius);
-        m.transform.rotation = Quaternion.LookRotation(dir, Vector2.up);
+        m.transform.position = loc + (dir * shot_offset);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        m.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         Ship s = m.GetComponent<Ship>();
-        s.vel = vel + (dir * s.thrust);
+        s.vel = vel + (dir * s.thrust); // should actually include mass, but whatever
 
         return 1;
     }
